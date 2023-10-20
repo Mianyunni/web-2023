@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <style>
+        /* Add any custom styles here */
+        .module-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .module-icon {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    
+    
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-secondary mx-2">Collapse All</button>
+                    <button class="btn btn-secondary mx-2">View Progress</button>
+                    <button class="btn btn-secondary mx-2">+ Module</button>
+                </div>
+
+                <ul class="list-group list-group-flush mt-4">
+                    <li class="list-group-item bg-secondary text-white">Module 1</li>
+                    <li class="list-group-item module-title">
+                        Introduction to the Course
+                        <i class="fas fa-check-circle module-icon"></i>
+                    </li>
+                    <li class="list-group-item module-title">
+                        Introduction to the Course Websites
+                        <i class="fas fa-check-circle module-icon"></i>
+                    </li>
+                    <li class="list-group-item module-title">
+                        Introduction to the Course Tools
+                        <i class="fas fa-check-circle module-icon"></i>
+                    </li>
+                    <li class="list-group-item module-title">
+                        Introduction to the Assignments
+                        <i class="fas fa-check-circle module-icon"></i>
+                    </li>
+                    <li class="list-group-item ml-4">Sub-item 1</li>
+                    <li class="list-group-item">Sub-item 2</li>
+                </ul>
+
+                <ul class="list-group list-group-flush mt-4">
+                    <li class="list-group-item bg-secondary text-white">Module 2</li>
+                    <li class="list-group-item module-title">
+                        Introduction to Module 2
+                        <i class="fas fa-check-circle module-icon"></i>
+                    </li>
+                    <li class="list-group-item module-title">
+                        Module 2 Tools
+                        <i class="fas fa-check-circle module-icon"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-none d-xl-block">
+                <h1>Courses Status</h1>
+                <button class="btn btn-danger">Unpublish</button>
+                <button class="btn btn-secondary">Publish</button>
+                <ul>
+                    <ul>
+                        <li><a href="/Kanbas/Courses/CourseNavigation/ImportExistingContent.html">Import Existing Content</a></li>
+                        <li><a href="/Kanbas/Courses/Home/screen.html">Choose Home Page</a></li>
+                        <li><a href="/Kanbas/Courses/Dashboard/courseNotifications.html">View Course Notification</a></li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

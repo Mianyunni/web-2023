@@ -1,0 +1,96 @@
+<table width="100%">
+    <tr>
+        <td valign="top">
+            <ul>
+                <li><a href="/Kanbas/Account/Profile/screen.html">Account</a></li>
+                <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
+                <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
+                <li><a href="/Kanbas/Calendar/index.html">Calender</a></li>
+            </ul>
+        </td>
+        <td valign="top">
+            <ul>
+                <ul>
+                    <li><a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+                    <li><a href="/Kanbas/Courses/Moudules/screen.html">Modules</a></li>
+                    <li><a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a></li>
+                    <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+                    <li><a href="/Kanbas/Courses/Setting/screen.html">Setting</a></li>
+                </ul>
+            </ul>
+        </td>
+        <td valign="top">
+            <head>
+                <title>Course Details Tab</title>
+            </head>
+            <body>
+                <h1>Course Details Tab</h1>
+            
+               
+            
+                <form action="/Kanbas/Courses/Home/screen.html">
+                    
+                    <label for="upload_image">Upload Image:</label>
+                    <input type="file" id="upload_image" name="upload_image" accept="image/*">
+            
+                    <br>
+                    <br/>
+                    <label for="timezone">Time Zone:</label>
+                    <select id="timezone" name="timezone">
+                        <option value="EST">Eastern Standard Time</option>
+                        <option value="PST">Pacific Standard Time</option>
+                        <!-- Add more time zones as needed -->
+                    </select>
+                    <br/>
+                    <br>
+            
+                    <label for="start_date">Course Start Date:</label>
+                    <input type="date" id="start_date" name="start_date">
+            
+                    <br>
+                    <br/>
+                    <label for="end_date">Course End Date:</label>
+                    <input type="date" id="end_date" name="end_date">
+            
+                    <br>
+                    <br/>
+                    <label for="due_time">Default Due Time:</label>
+                    <input type="time" id="due_time" name="due_time" value="23:59">
+            
+                    <br>
+                    <br/>
+                    <label for="language">Language:</label>
+                    <input type="text" id="language" name="language">
+            
+                    <br>
+                    <br/>
+                    <label for="file_storage">File Storage:</label>
+                    <input type="checkbox" id="file_storage" name="file_storage">
+            
+                    <br>
+                    <br/>
+                    <label for="grading_scheme">Grading Scheme:</label>
+                    <input type="checkbox" id="grading_scheme" name="grading_scheme">
+            
+                    <br>
+                    <br/>
+                    <label for="file_copyright">File Copyright:</label>
+                    <input type="checkbox" id="file_copyright" name="file_copyright">
+            
+                    <br>
+                    <br/>
+                    <label for="description">Description:</label><br>
+                    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+            
+                    <br>
+                    <br/>
+                    <!-- Add more input fields, checkboxes, etc. as needed -->
+            
+                    <input type="submit" value="Update">
+                </form>
+            
+                
+            </body>
+        </td>
+    </tr>
+</table>

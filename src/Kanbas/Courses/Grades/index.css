@@ -1,0 +1,9 @@
+.gradebook-heading {
+    color: red;
+    display: inline-block;
+  }
+  
+  .gradebook-heading::after {
+    content: "\25BE"; /* 这是一个小三角形的Unicode编码，朝下 */
+    margin-left: 5px;
+  }

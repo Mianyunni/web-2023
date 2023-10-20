@@ -1,0 +1,15 @@
+.container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Example: Add some margin between elements */
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+/* 左对齐 */
+.text-left {
+    text-align: left !important;
+}
