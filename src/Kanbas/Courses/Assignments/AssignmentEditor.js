@@ -1,38 +1,117 @@
-import React from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import db from "../../Database";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function AssignmentEditor() {
-  const { assignmentId } = useParams();
-  const assignment = db.assignments.find(
-    (assignment) => assignment._id === assignmentId);
+function AssignmentEditor({ assignments, addAssignment, updateAssignment }) {
+    const [formState, setFormState] = useState({
+        name: '',
+        description: '',
+        dueDate: '',
+        availableFromDate: '',
+        availableUntilDate: ''
+    });
 
-  const { courseId } = useParams();
-  const navigate = useNavigate();
-  const handleSave = () => {
-    console.log("Actually saving assignment TBD in later assignments");
-    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
-  };
-  return (
-    <div>
-      <h2>Assignment Name</h2>
-      <input value={assignment.title}
-             className="form-control mb-2" />
-      <Link to={`/Kanbas/Courses/${courseId}/Assignments`}
-            className="btn btn-danger">
-        Cancel
-      </Link>
-      {/* <Link onClick={handleSave}
-            to={`/Kanbas/Courses/${courseId}/Assignments`}
-            className="btn btn-success me-2">
-        Save
-      </Link> */}
-      <button onClick={handleSave} className="btn btn-success me-2">
-        Save
-      </button>
-    </div>
-  );
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        if (id && assignments[id]) {
+            setFormState(assignments[id]);
+        }
+    }, [id, assignments]);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormState(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async () => {
+        try {
+            if (id) {
+                await updateAssignment({ ...formState, _id: id });
+            } else {
+                await addAssignment(formState);
+            }
+            navigate('/assignments');
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    return (
+        <div>
+            <h2>{id ? 'Edit Assignment' : 'Create Assignment'}</h2>
+
+            <div>
+                <label>
+                    Name:
+                    <input
+                        type="text"
+                        name="name"
+                        value={formState.name}
+                        onChange={handleInputChange}
+                    />
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    Description:
+                    <textarea
+                        name="description"
+                        value={formState.description}
+                        onChange={handleInputChange}
+                    ></textarea>
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    Due Date:
+                    <input
+                        type="date"
+                        name="dueDate"
+                        value={formState.dueDate}
+                        onChange={handleInputChange}
+                    />
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    Available From:
+                    <input
+                        type="date"
+                        name="availableFromDate"
+                        value={formState.availableFromDate}
+                        onChange={handleInputChange}
+                    />
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    Available Until:
+                    <input
+                        type="date"
+                        name="availableUntilDate"
+                        value={formState.availableUntilDate}
+                        onChange={handleInputChange}
+                    />
+                </label>
+            </div>
+
+            <button onClick={handleSubmit}>
+                Save
+            </button>
+            <button onClick={() => navigate('/assignments')}>
+                Cancel
+            </button>
+        </div>
+    );
 }
 
-
 export default AssignmentEditor;
+

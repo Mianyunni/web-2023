@@ -6,3 +6,117 @@
 .icon-spacing {
     margin-right: 10px; /* 调整图标之间的间距 */
 }
+.module-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ModuleList.css */
+
+/* Styling for the main container */
+.module-container {
+    margin: 20px;
+  }
+  
+  /* Styling for the module input group */
+  .module-input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Styling for module input fields */
+  .module-input {
+    flex-grow: 1;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Styling for the Add and Update buttons */
+  .green-button{
+    background-color: green;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-right: 5px;
+  }
+  .update-button {
+    background-color: blue;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+    
+  }
+  
+  /* Styling for module description textarea */
+  .module-description {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Styling for list of modules */
+  .list-group {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Styling for each module item */
+  .module-item {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  /* Styling for Edit and Delete buttons */
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .edit-button{
+    background-color: green;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 5px 10px;
+  }
+  .delete-button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 5px 10px;
+  }
+  
+  /* Styling for the Edit Module section */
+  .edit-module-section {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  /* Styling for the Edit Module section title */
+  .edit-module-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  

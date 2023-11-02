@@ -2,113 +2,64 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import db from "../../Database";
 import { FaEllipsisV } from 'react-icons/fa';
-import {GoTriangleRight,GoTriangleDown} from "react-icons/go"
-import {AiFillCheckCircle} from "react-icons/ai";
-import {BsPlus} from "react-icons/bs";
+import { GoTriangleRight, GoTriangleDown } from "react-icons/go"
+import { AiFillCheckCircle } from "react-icons/ai";
+import { BsPlus } from "react-icons/bs";
 import "./index.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {HiOutlineEllipsisVertical} from "react-icons/hi2";
-
+import { HiOutlineEllipsisVertical } from "react-icons/hi2";
+import { useSelector, useDispatch } from "react-redux";
+import { addModule, deleteModule, setModule, updateModule } from "./modulesReducer"; // adjust path if needed
 
 function ModuleList() {
   const { courseId } = useParams();
-  const modules = db.modules;
+  const modules = useSelector(state => state.modulesReducer.modules);
+  const module = useSelector(state => state.modulesReducer.module);
+  const dispatch = useDispatch();
+
   return (
     <div>
-          <div className="d-flex justify-content-between mb-3">
-          <div className="d-flex">
-      <button className="btn btn-light me-2">Collapse All</button>
-      <button className="btn btn-light me-2">View Progress</button>
-      <div className="btn-group me-2">
-        <button className="btn btn-success">
-          <span role="img" aria-label="check-mark">✅</span> Publish All
-        </button>
-        <button className="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <span className="ms-2" role="img" aria-label="dropdown-icon">▼</span>
-        </button>
-        <ul className="dropdown-menu">
-          <li><a className="dropdown-item" href="#">Action</a></li>
-          <li><a className="dropdown-item" href="#">Another action</a></li>
-          <li><a className="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-      <button className="btn btn-danger me-2">+ Module</button>
-      <button className="btn btn-light mr-2"><HiOutlineEllipsisVertical /></button>
-    </div>
-      </div>
+      {/* ... (keep the JSX above unchanged) */}
       <ul className="list-group">
-        {
-          modules
-            .filter((module) => module.course === courseId)
-            .map((module, index) => (
-              <li key={index} className="list-group-item">
-                <h3>{module.name}</h3>
-                <p>{module.description}</p>
-              </li>
-            ))
-        }
+        <li className="list-group-item">
+          <div className="module-input-group">
+            <input
+              className="module-input"
+              value={module.name}
+              onChange={(e) => dispatch(setModule({ ...module, name: e.target.value }))}
+              placeholder="Module name"
+            />
+            <textarea
+              className="module-description"
+              value={module.description}
+              onChange={(e) => dispatch(setModule({ ...module, description: e.target.value }))}
+              placeholder="Module description"
+            ></textarea>
+            <button className="btn btn-primary update-button" onClick={() => dispatch(updateModule(module))}>
+              Update
+            </button>
+            <button className="btn btn-success green-button" onClick={() => dispatch(addModule({ ...module, course: courseId }))}>
+              Add
+            </button>
+          </div>
+        </li>
+        {modules
+          .filter((mod) => mod.course === courseId)
+          .map((mod, index) => (
+            <li key={mod._id} className="list-group-item module-item">
+              <h3>{mod.name}</h3>
+              <p>{mod.description}</p>
+              <p>{mod._id}</p>
+              <div className="button-group">
+                {/* ... (rest of your code) */}
+                {/* Add buttons or actions to edit/delete */}
+                <button className="btn btn-danger" onClick={() => dispatch(deleteModule(mod._id))}>Delete</button>
+                <button className="btn btn-primary" onClick={() => dispatch(setModule(mod))}>Edit</button>
+              </div>
+            </li>
+          ))}
       </ul>
-      <hr /> 
-      {/* List Group */}
-      <ul className="list-group">
-    <li className="list-group-item d-flex justify-content-between align-items-center bg-light p-3 mb-3">
-        <div className="d-flex align-items-center">
-            <FaEllipsisV className="icon-spacing" />
-            <GoTriangleRight/>
-            <span>Resources</span>
-        </div>
-        <div className="icon-container">
-            <AiFillCheckCircle className="text-success icon-spacing" />
-            <GoTriangleDown className="icon-spacing" />
-            <BsPlus className="icon-spacing" />
-            <FaEllipsisV />
-        </div>
-    </li>
-    
-    <li className="list-group-item d-flex justify-content-between align-items-center bg-light p-3 mb-3">
-        <div className="d-flex align-items-center">
-            <FaEllipsisV className="icon-spacing" />
-            <GoTriangleRight/>
-            <span>Required Textbook</span>
-        </div>
-        <div className="icon-container">
-            <AiFillCheckCircle className="text-success icon-spacing" />
-            <GoTriangleDown className="icon-spacing" />
-            <BsPlus className="icon-spacing" />
-            <FaEllipsisV />
-        </div>
-    </li>
-    
-    <li className="list-group-item d-flex justify-content-between align-items-center bg-light p-3 mb-3">
-        <div className="d-flex align-items-center">
-            <FaEllipsisV className="icon-spacing" />
-            <GoTriangleRight/>
-            <span>Week0 - INTRO</span>
-        </div>
-        <div className="icon-container">
-            <AiFillCheckCircle className="text-success icon-spacing" />
-            <GoTriangleDown className="icon-spacing" />
-            <BsPlus className="icon-spacing" />
-            <FaEllipsisV />
-        </div>
-    </li>
-    
-    <li className="list-group-item d-flex justify-content-between align-items-center bg-light p-3 mb-3">
-        <div className="d-flex align-items-center">
-            <FaEllipsisV className="icon-spacing" />
-            <GoTriangleRight/>
-            <span>Week1 - HTML</span>
-        </div>
-        <div className="icon-container">
-            <AiFillCheckCircle className="text-success icon-spacing" />
-            <GoTriangleDown className="icon-spacing" />
-            <BsPlus className="icon-spacing" />
-            <FaEllipsisV />
-        </div>
-    </li>
-</ul> 
     </div>
-    
   );
 }
 
