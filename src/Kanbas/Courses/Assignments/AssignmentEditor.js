@@ -4,7 +4,7 @@ import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { useSelector, useDispatch } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment, selectAssignment } from "./assignmentsReducer";
+import { addAssignment, updateAssignment, selectAssignment } from "./assignmentsReducer";
  
 function AssignmentEditor() {
   const { assignmentId } = useParams();
