@@ -1,6 +1,5 @@
 import React from "react";
 import ModuleList from "../Modules/ModuleList";
-import {BiGlasses} from "react-icons/bi";
 import ButtonList from "./ButtonList";
 import { FaStar } from 'react-icons/fa';
 

@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, updateAssignment, selectAssignment } from "./assignmentsReducer";
  
 function AssignmentEditor() {
-  const { assignmentId } = useParams();
+
   const { assignment } = useSelector((state) => state.assignmentsReducer);
   const { courseId } = useParams();
   const dispatch = useDispatch();
