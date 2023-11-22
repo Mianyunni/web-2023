@@ -8,10 +8,13 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/AssignmentEditor";
 import Grades from "./Grades";
 import {HiBars3} from "react-icons/hi2";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Courses() {
   const { courseId } = useParams();
   const {pathname} = useLocation();
+
   const [empty, kanbas, courses, id, screen] = pathname.split("/");
   const course = db.courses.find((course) => course._id === courseId);
   return (
