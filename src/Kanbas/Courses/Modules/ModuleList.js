@@ -5,17 +5,19 @@ import {
   addModule,
   deleteModule,
   updateModule,
-  setModule,
+  setModules,
 } from "./modulesReducer";
 import { findModulesForCourse, createModule } from "./client";
 import * as client from "./client";
 
 function ModuleList() {
-  app.delete("/api/modules/:mid", (req, res) => {
-    const { mid } = req.params;
-    db.modules = db.modules.filter((m) => m._id !== mid);
-    res.sendStatus(200);
-  });
+ 
+  const handleDeleteModule = (moduleId) => {
+    client.deleteModule(moduleId).then((status) => {
+      dispatch(deleteModule(moduleId));
+    });
+  };
+
   const handleAddModule = () => {
     createModule(courseId, module).then((module) => {
       dispatch(addModule(module));
@@ -43,13 +45,13 @@ function ModuleList() {
         <input
           value={module?.name || ''}
           onChange={(e) =>
-            dispatch(setModule({ ...module, name: e.target.value }))
+            dispatch(setModules({ ...module, name: e.target.value }))
           }
         />
         <textarea
           value={module?.description || ''}
           onChange={(e) =>
-            dispatch(setModule({ ...module, description: e.target.value }))
+            dispatch(setModules({ ...module, description: e.target.value }))
           }
         />
       </li>
@@ -57,7 +59,7 @@ function ModuleList() {
         .filter((module) => module.course === courseId)
         .map((module, index) => (
           <li key={index} className="list-group-item">
-            <button onClick={() => dispatch(setModule(module))}>Edit</button>
+            <button onClick={() => dispatch(setModules(module))}>Edit</button>
             <button
               onClick={() => handleDeleteModule(module._id)}>
               Delete
