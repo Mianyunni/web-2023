@@ -12,7 +12,7 @@ function WorkingWithObjects() {
         score: 0,
     });
 
-    const URL = 'http://localhost:8000/a5/assignment'; // Base URL for API requests
+    const URL = 'http://localhost:4000/a5/assignment'; // Base URL for API requests
 
     // Function to fetch assignment data from server
     const fetchAssignment = async () => {
@@ -56,13 +56,13 @@ function WorkingWithObjects() {
 
             <h4>Retrieving Objects</h4> {/* Subtitle for retrieving objects */}
             {/* Link to get the assignment object */}
-            <a href="http://localhost:8000/a5/assignment" className="btn btn-primary me-2">
+            <a href="http://localhost:4000/a5/assignment" className="btn btn-primary me-2">
                 Get Assignment
             </a>
 
             <h4>Retrieving Properties</h4> {/* Subtitle for retrieving specific properties */}
             {/* Link to get the title of the assignment */}
-            <a href="http://localhost:8000/a5/assignment/title" className="btn btn-primary me-2">
+            <a href="http://localhost:4000/a5/assignment/title" className="btn btn-primary me-2">
                 Get Title
             </a>
         </div>

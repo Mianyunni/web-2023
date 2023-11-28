@@ -8,7 +8,7 @@ function EncodingParametersInURLs() { // Declaration of the EncodingParametersIn
 
   // Async function to fetch a welcome message from a server.
   const fetchWelcome = async () => {
-    const response = await axios.get("http://localhost:8000/a5/welcome"); // Makes an HTTP GET request to the specified URL.
+    const response = await axios.get("http://localhost:4000/a5/welcome"); // Makes an HTTP GET request to the specified URL.
     setWelcome(response.data); // Sets the 'welcome' state variable with the data received from the response.
   };
 
@@ -21,13 +21,13 @@ function EncodingParametersInURLs() { // Declaration of the EncodingParametersIn
 
   // Async function to fetch the sum of 'a' and 'b' from a server.
   const fetchSum = async (a, b) => {
-    const response = await axios.get(`http://localhost:8000/a5/add/${a}/${b}`); // Makes an HTTP GET request to add 'a' and 'b'.
+    const response = await axios.get(`http://localhost:4000/a5/add/${a}/${b}`); // Makes an HTTP GET request to add 'a' and 'b'.
     setResult(response.data); // Updates the 'result' state variable with the response data.
   };
 
   // Async function to fetch the subtraction result of 'a' and 'b' from a server.
   const fetchSubtraction = async (a, b) => {
-    const response = await axios.get(`http://localhost:8000/a5/subtract/${a}/${b}`); // Makes an HTTP GET request to subtract 'b' from 'a'.
+    const response = await axios.get(`http://localhost:4000/a5/subtract/${a}/${b}`); // Makes an HTTP GET request to subtract 'b' from 'a'.
     setResult(response.data); // Updates the 'result' state variable with the response data.
   };
 
@@ -59,13 +59,13 @@ function EncodingParametersInURLs() { // Declaration of the EncodingParametersIn
 
       <h3>Path Parameters</h3> 
       {/* // Anchor tags with href attributes dynamically created to show how path parameters can be used in URLs. */}
-      <a href={`http://localhost:8000/a5/add/${a}/${b}`} className="btn btn-primary">Add {a} + {b}</a>
-      <a href={`http://localhost:8000/a5/subtract/${a}/${b}`} className="btn btn-danger">Subtract {a} - {b}</a>
+      <a href={`http://localhost:4000/a5/add/${a}/${b}`} className="btn btn-primary">Add {a} + {b}</a>
+      <a href={`http://localhost:4000/a5/subtract/${a}/${b}`} className="btn btn-danger">Subtract {a} - {b}</a>
 
       <h3>Query Parameters</h3> 
       {/* // Anchor tags with href attributes dynamically created to show how query parameters can be used in URLs. */}
-      <a href={`http://localhost:8000/a5/calculator?operation=add&a=${a}&b=${b}`} className="btn btn-primary">Add {a} + {b}</a>
-      <a href={`http://localhost:8000/a5/calculator?operation=subtract&a=${a}&b=${b}`} className="btn btn-danger">Subtract {a} - {b}</a>
+      <a href={`http://localhost:4000/a5/calculator?operation=add&a=${a}&b=${b}`} className="btn btn-primary">Add {a} + {b}</a>
+      <a href={`http://localhost:4000/a5/calculator?operation=subtract&a=${a}&b=${b}`} className="btn btn-danger">Subtract {a} - {b}</a>
     </div>
   );
 }
