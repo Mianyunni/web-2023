@@ -1,33 +1,18 @@
-import axios from "axios";
-import { Route, Routes, Navigate } from "react-router";
+//import Nav from "../Nav";
 import KanbasNavigation from "./KanbasNavigation";
-import Courses from "./Courses";
-// import Account from "./Account";
+import axios from "axios";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
-
+import Courses from "./Courses";
 import db from "./Database";
-import { useState, useEffect } from "react";
-import store from "./store/index.js";
+import { useEffect, useState } from "react";
+import store from "./store";
 import { Provider } from "react-redux";
 
-
 function Kanbas() {
-  const [courses, setCourses] = useState([]);
-  const [course, setCourse] = useState({
-    name: "New Course",      number: "New Number",
-    startDate: "2023-09-10", endDate: "2023-12-15",
-  });
-
-  const initialCourseState = {
-    name: "",
-    number: "",
-    startDate: "",
-    endDate: ""
-  };
-
-  const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:8000/api';
+  const [courses, setCourses] = useState(db.courses);
+  const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:4000/api';
   const URL = `${API_BASE}/courses`;
-
 
   const findAllCourses = async () => {
     const response = await axios.get(URL);
@@ -36,68 +21,58 @@ function Kanbas() {
   useEffect(() => {
     findAllCourses();
   }, []);
-
-
-  const addCourse = async () => {
-    const response = await axios.post(URL, course);
-    console.log("course added: ", course);
-    console.log("response.data: ", response.data);
-    setCourses([response.data, ...courses]);
-    setCourse(initialCourseState); // Reset the course to its initial state
+  const [course, setCourse] = useState({objId: courses.length + 1,
+    name: "Course Name", _id: "Course Number",
+    startDate: "2023-09-10", endDate: "2023-12-15",
+  });
+  const addNewCourse = () => {
+    setCourses([...courses, course]);
   };
-
-  
-  const deleteCourse = async (courseId) => {
-    await axios.delete(`${URL}/${courseId}`);
-    setCourses(courses.filter((c) => c._id !== courseId));
+  const deleteCourse = async(id) => {
+    const response = await axios.delete(
+      `${URL}/${course._id}`
+    );
+    if (window.confirm("Do you want to DELETE this Course?")) {
+      setCourses(courses.filter((course) => course._id !== id));
+      }
   };
-
-  const updateCourse = async () => {
-    try {
-        // Update the course on the server
-        const response = await axios.put(`${URL}/${course._id}`, course);
-
-        // Update the course in the local state
-        setCourses(courses.map(c => c._id === course._id ? { ...c, ...course } : c));
-
-        // Optionally, reset the course form or set it to a default state
-        setCourse({
-            name: "",      
-            number: "",
-            startDate: "2023-09-10", 
-            endDate: "2023-12-15",
-        });
-    } catch (error) {
-        console.error("Error updating course:", error);
-        // Handle the error appropriately
+  const updateCourse = async() => {
+    const response = await axios.put(
+      `${URL}/${course._id}`,
+      course
+    );
+    if (window.confirm("Do you want to UPDATE this Course?")) {
+    setCourses(
+      response.data,
+      courses.map((c) => {
+        if (c.objId === course.objId) {
+          return course;
+        } else {
+          return c;
+        }
+      })
+    );
     }
-};
-
-
+  }
   return (
     <Provider store={store}>
-      <div className="d-flex">
-        <KanbasNavigation />
-        <div>
-          <Routes>
-            <Route path="/" element={<Navigate to="Dashboard" />} />
-            <Route path="Account" element={<h1>Account</h1>} />
-            <Route path="Dashboard" element={
-              <Dashboard
-                courses={courses}
-                course={course}
-                setCourse={setCourse}
-                addNewCourse={addCourse}
-                deleteCourse={deleteCourse}
-                updateCourse={updateCourse}/>
-            } />
-            <Route path="Courses/:courseId/*" element={
-              <Courses courses={courses} />} />
-
-
-          </Routes>
-        </div>
+    <div className="d-flex">
+      <KanbasNavigation />
+      <div className="" style={{ flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<Navigate to="Dashboard" />} />
+          <Route path="Account" element={<h1>Account</h1>} />
+          <Route path="Dashboard" element={<Dashboard
+              courses={courses}
+              course={course}
+              setCourse={setCourse}
+              addNewCourse={addNewCourse}
+              deleteCourse={deleteCourse}
+              updateCourse={updateCourse}/>} />
+          <Route path="Courses/:courseId/*" element={<Courses courses={courses} />} />
+        </Routes>
       </div>
+    </div>
     </Provider>
   );
 }
