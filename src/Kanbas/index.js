@@ -36,22 +36,21 @@ function Kanbas() {
       setCourses(courses.filter((course) => course._id !== id));
       }
   };
-  const updateCourse = async() => {
-    const response = await axios.put(
-      `${URL}/${course._id}`,
-      course
-    );
+  const updateCourse = async() => {    
     if (window.confirm("Do you want to UPDATE this Course?")) {
-    setCourses(
-      response.data,
-      courses.map((c) => {
-        if (c.objId === course.objId) {
-          return course;
-        } else {
+      const response = await axios.put(
+        `${URL}/${course._id}`,
+        course
+      );
+      console.log(response.data);
+      setCourses(        
+        courses.map((c) => {
+          if (c._id === course._id) {            
+            return course;            
+          }
           return c;
-        }
-      })
-    );
+        })
+      );
     }
   }
   return (
