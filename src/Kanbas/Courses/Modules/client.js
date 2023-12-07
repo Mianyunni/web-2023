@@ -37,12 +37,22 @@
 // }
 
 import axios from "axios";
+
+const client = axios.create({
+  baseURL: "http://localhost:4000/api",
+  withCredentials: true,
+});
+
 // const API_BASE = process.env.REACT_APP_API_BASE;
 // const MODULES_URL = `${API_BASE}/modules`;
 // const COURSES_URL = `${API_BASE}/courses`;
 const COURSES_URL = "http://localhost:4000/api/courses";
 const MODULES_URL = "http://localhost:4000/api/modules";
  
+export const addModule = async (courseId, module) => {
+  const response = await client.post(`/courses/${courseId}/modules`, module);
+  return response.data;
+};
 // A5: 4.3.1 Retrieving Modules for a Course
 export const findModulesForCourse = async (courseId) => {
   const response = await axios

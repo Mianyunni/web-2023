@@ -8,16 +8,14 @@ import db from "./Database";
 import { useEffect, useState } from "react";
 import store from "./store";
 import { Provider } from "react-redux";
-import Signin from "../project/users/signin";
-import Account from "../project/users/account";
-import UserTable from "../project/users/table";
-import Signup from "../project/users/signup";
+import Signin from "./users/Signin";
+import Account from "./users/Account";
+import UserTable from "./users/Table";
+import Signup from "./users/Signup";
 
 function Kanbas() {
   const [courses, setCourses] = useState(db.courses);
-  const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:4000/api';
-  const URL = `${API_BASE}/courses`;
-
+  const URL = "http://localhost:4000/api/courses";
   const findAllCourses = async () => {
     const response = await axios.get(URL);
     setCourses(response.data);
@@ -40,22 +38,22 @@ function Kanbas() {
       setCourses(courses.filter((course) => course._id !== id));
       }
   };
-  const updateCourse = async() => {    
+  const updateCourse = async() => {
+    const response = await axios.put(
+      `${URL}/${course._id}`,
+      course
+    );
     if (window.confirm("Do you want to UPDATE this Course?")) {
-      const response = await axios.put(
-        `${URL}/${course._id}`,
-        course
-      );
-      console.log(response.data);
-      setCourses(        
-        courses.map((c) => {
-          // if (c._id === course._id) {            
-          if (c.objId === course.objId) {
-            return course;            
-          }
+    setCourses(
+      response.data,
+      courses.map((c) => {
+        if (c.objId === course.objId) {
+          return course;
+        } else {
           return c;
-        })
-      );
+        }
+      })
+    );
     }
   }
   return (
@@ -65,7 +63,6 @@ function Kanbas() {
       <div className="" style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Navigate to="Dashboard" />} />
-          <Route path="Account" element={<h1>Account</h1>} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/account" element={<Account />} />
@@ -86,4 +83,4 @@ function Kanbas() {
     </Provider>
   );
 }
-export default Kanbas
+export default Kanbas;
